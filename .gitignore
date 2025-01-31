@@ -1,8 +1,7 @@
-# Rust
-target/
-
 # IDE
-.idea/
-.vscode/
+.idea
+.vs
+.vscode
 
-# Program specific
+# Rust
+target
