@@ -21,6 +21,8 @@ use winit::{
     },
 };
 
+mod config;
+
 struct AppSurface {
     device: wgpu::Device,
     queue:  wgpu::Queue,
@@ -148,7 +150,6 @@ impl ApplicationHandler for App {
                 }
             },
             WindowEvent::CloseRequested => {
-                println!("The close button was pressed; stopping");
                 event_loop.exit();
             },
             WindowEvent::RedrawRequested => {
@@ -207,6 +208,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing::subscriber::set_global_default(fmt_subscriber)?;
 
     info!("Hello world!");
+
+    // Ensure config is Loaded + Valid
+    config::GLOBAL_CONFIG.write();
 
     let event_loop = winit::event_loop::EventLoop::new()?;
     event_loop.set_control_flow(winit::event_loop::ControlFlow::Poll); // TODO: Investigate
